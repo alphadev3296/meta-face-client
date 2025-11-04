@@ -1,0 +1,24 @@
+[tool.ruff]
+target-version = "py312"
+line-length = 120
+exclude = ["venv", "experiments/fill_test_data/test_data"]
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "BLE001",
+    "C901",
+    "COM812",
+    "D",
+    "ISC001",
+    "PLR0912",
+    "PLR0913",
+    "PLR0915",
+    "S101",
+    "UP040",
+] # TODO leave only "COM812", "ANN102", "UP040" in ignores
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+plugins = ["pydantic.mypy"]
