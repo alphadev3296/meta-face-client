@@ -54,3 +54,6 @@ dmypy.json
 
 # pyenv
 .python-version
+
+# UI html files
+static/

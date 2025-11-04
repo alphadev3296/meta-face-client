@@ -1,14 +1,17 @@
 import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 
 from backend.api.router import router as api_router
 from backend.conf.app import config as cfg_app
+from backend.conf.fs import config as cfg_fs
 
 # Create FastAPI instance
 app = FastAPI(
     debug=cfg_app.DEBUG,
     title=cfg_app.APP_TITLE,
+    version=cfg_app.APP_VERSION,
     contact={
         "name": cfg_app.APP_NAME,
         "url": str(cfg_app.APP_URL),
@@ -28,6 +31,9 @@ app.add_middleware(
 
 # Include routers
 app.include_router(api_router, prefix="/api")
+
+# Mount static files
+app.mount("/", StaticFiles(directory=cfg_fs.STATIC_DIR), name="static")
 
 if __name__ == "__main__":
     uvicorn.run(
